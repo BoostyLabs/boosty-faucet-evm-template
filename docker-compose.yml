@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  redis:
+    container_name: faucet-redis
+    image: redis:8.0.2
+      #networks:
+      #- faucet-redis-net
+      #ipv4_address: 172.20.1.2
+      #extra_hosts:
+    # - host.docker.internal:host-gateway
+    environment:
+      - REDIS_PASSWORD=testpassword
+    volumes:
+      - redis-node1-data:/data
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_PASSWORD --appendonly yes --replica-read-only no"
+    ports:
+      - "22279:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  api:
+    container_name: faucet-evm-template
+      #networks:
+      # - faucet-redis-net
+    # ipv4_address: 172.20.1.3
+    build: .
+    depends_on:
+      - redis
+    ports:
+      - 22230:3000
+
+networks:
+  faucet-redis-net:
+    #external: true
+    driver: bridge
+      #networks:
+      #faucet-redis-net:
+      #driver: bridge
+      #ipam:
+      #  config:
+      #    - subnet: 172.20.0.0/24
+    #      gateway: 172.20.0.1
+
+volumes:
+  redis-node1-data:
