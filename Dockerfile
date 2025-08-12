@@ -27,7 +27,7 @@ COPY --from=build /usr/src/app/.next ./.next
 
 COPY --from=build /usr/src/app/package*.json ./
 
-COPY --from=build /usr/src/app/.env ./.env
+#COPY --from=build /usr/src/app/.env ./.env
 
 EXPOSE 22230
 
