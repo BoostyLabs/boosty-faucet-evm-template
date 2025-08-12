@@ -5,10 +5,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Testnet Faucet</title>
-        <meta name="description" content="Testnet Facuet" />
+        <title>NEX Faucet</title>
+        <meta name="description" content="NEX Facuet" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <main>
         <Faucet />
