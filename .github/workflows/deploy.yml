@@ -36,6 +36,8 @@ env:
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   VM_IP: ${{ vars.VM_IP }}
   VM_USER: ${{ secrets.VM_USER }}
+  NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_HCAPTCHA_SITE_KEY }}
+  HCAPTCHA_SECRET: ${{ secrets.HCAPTCHA_SECRET }}
 
 jobs:
   build:
