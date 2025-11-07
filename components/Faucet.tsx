@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import SuccessModal from "./SuccessModal";
 import ErrorModal from "./ErrorModal";
+import BgGrid from "./BgGrid";
 
 export default function Faucet() {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -36,31 +37,39 @@ export default function Faucet() {
 
   return (
     <>
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8">
-          <div>
+    <div className="h-screen w-screen bg-[#F9FAF9] p-12 overflow-hidden relative">
+      <div className="z-40 flex justify-center  flex-1">
+        <div className="w-full max-w-[554px]">
+          <div className="pb-[60px]">
             <img className="mx-auto h-12 w-auto" src="logo.svg" alt="Testnet Faucet" />
           </div>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="-space-y-px rounded-md shadow-sm">
+          <form className="space-y-4 bg-white p-6 rounded-lg shadow-[0px_1px_8px_0px_rgba(12,12,13,0.05),_0px_1px_4px_0px_rgba(0,0,0,0.05)]" onSubmit={handleSubmit}>
               <div>
-                <input id="address" name="address" type="string" required className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="0xdD4c825203f97984e7867F11eeCc813A036089D1" />
+                <div className="mb-3 text-[#07130C] font-semibold">
+                  Get test tokens
+                </div>
+                <div className="text-sm text-[#989898]">Every 1 hour, NEX Testnet tokens can be claimed.</div>
               </div>
-            </div>
-            <div className="flex justify-center">
-              <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} />
-            </div>
+              <input id="address" name="address" type="string" required className="relative block w-full appearance-none rounded-lg border border-[#E8E8E8] px-4 py-[14px] text-[#07130C] placeholder:text-[#989898] placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm" placeholder="Enter your Nex smart chain testnet address" />
             <div>
-              <button
-                disabled={isDisabled}
-                type="submit"
-                className="disabled:opacity-25 group relative flex w-full justify-center rounded-md border border-[#183C24] bg-[#49FF86] py-2 px-4 text-sm font-medium text-[#183C24] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#49FF86] focus:ring-offset-2"
-              >
-                Request Funds
-              </button>
+              <div className="flex justify-center pb-4 empty:pb-0">
+                {/* <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} /> */}
+              </div>
+              <div>
+                <button
+                  disabled={isDisabled}
+                  type="submit"
+                  className="disabled:bg-[#E1E3E2] disabled:text-[#C1C2C1] group relative flex w-full justify-center rounded-lg bg-[#07130C] p-4 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#49FF86] focus:ring-offset-2"
+                >
+                  NEX
+                </button>
+              </div>
             </div>
           </form>
         </div>
+      </div>
+      <img className="z-40 ml-auto h-[274px] w-auto" src="testnet-rubiks.svg" alt="Testnet rubik" />
+      <BgGrid/>
       </div>
       <SuccessModal message={successMessage} />
       <ErrorModal message={errorMessage} />
