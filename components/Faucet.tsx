@@ -38,7 +38,8 @@ export default function Faucet() {
   return (
     <>
     <div className="h-screen w-screen bg-[#F9FAF9] p-4 md:p-12 overflow-hidden relative flex flex-col">
-      <div className="z-2 flex justify-center  flex-1">
+      <BgGrid/>
+      <div className="z-20 flex justify-center  flex-1">
         <div className="w-full max-w-[554px]">
           <div className="pb-[60px]">
             <img className="mx-auto h-12 w-auto" src="logo.svg" alt="Testnet Faucet" />
@@ -71,8 +72,7 @@ export default function Faucet() {
           </form>
         </div>
       </div>
-      <img className="z-2 ml-auto h-[274px] w-auto" src="testnet-rubiks.svg" alt="Testnet rubik" />
-      <BgGrid/>
+      <img className="z-20 ml-auto h-[274px] w-auto" src="testnet-rubiks.svg" alt="Testnet rubik" />
       </div>
       <SuccessModal message={successMessage} />
       <ErrorModal message={errorMessage} />
