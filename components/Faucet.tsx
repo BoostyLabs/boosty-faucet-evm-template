@@ -37,7 +37,7 @@ export default function Faucet() {
 
   return (
     <>
-    <div className="h-screen w-screen bg-[#F9FAF9] p-12 overflow-hidden relative">
+    <div className="h-screen w-screen bg-[#F9FAF9] p-4 md:p-12 overflow-hidden relative flex flex-col">
       <div className="z-40 flex justify-center  flex-1">
         <div className="w-full max-w-[554px]">
           <div className="pb-[60px]">
@@ -53,7 +53,7 @@ export default function Faucet() {
               <input id="address" name="address" type="string" required className="relative block w-full appearance-none rounded-lg border border-[#E8E8E8] px-4 py-[14px] text-[#07130C] placeholder:text-[#989898] placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm" placeholder="Enter your Nex smart chain testnet address" />
             <div>
               <div className="flex justify-center pb-4 empty:pb-0">
-                {/* <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} /> */}
+                <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} />
               </div>
               <div>
                 <button
