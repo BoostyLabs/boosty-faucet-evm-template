@@ -48,7 +48,10 @@ export default function Faucet() {
                 <div className="mb-3 text-[#07130C] font-semibold">
                   Get test tokens
                 </div>
-                <div className="text-sm text-[#989898]">Every 1 hour, NEX Testnet tokens can be claimed.</div>
+                <div className="flex gap-1">
+                  <img className="w-5 h-5 text-[#989898]" src="check.svg" alt="check icon" />
+                  <div className="text-sm text-[#989898]">Every 1 hour, NEX Testnet tokens can be claimed.</div>
+                </div>
               </div>
               <input id="address" name="address" type="string" required className="relative block w-full appearance-none rounded-lg border border-[#E8E8E8] px-4 py-[14px] text-[#07130C] placeholder:text-[#989898] placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm" placeholder="Enter your Nex smart chain testnet address" />
             <div>
