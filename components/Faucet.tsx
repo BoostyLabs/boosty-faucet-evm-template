@@ -4,6 +4,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import SuccessModal from "./SuccessModal";
 import ErrorModal from "./ErrorModal";
 import BgGrid from "./BgGrid";
+import { utils } from "ethers";
 
 export default function Faucet() {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -18,22 +19,41 @@ export default function Faucet() {
     setIsDisabled(false);
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // disable submit button
-    setIsDisabled(true);
-    // send request to faucet
-    const response = await fetch("/api/faucet", {
-      method: "POST",
-      body: JSON.stringify({ address: event.currentTarget.address.value, hcaptchaToken }),
-    });
-    // parse response
-    const data = await response.json();
-    // if error
-    if (response.status != 200) return setErrorMessage(data.message);
-    // success!
-    setSuccessMessage(data.message);
-  };
+const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  setIsDisabled(true);
+
+  const address = event.currentTarget.address.value.trim();
+
+  // Validate address format
+  if (!utils.isAddress(address)) {
+    setErrorMessage("Invalid wallet address.");
+    setIsDisabled(false);
+    return;
+  }
+
+  // Prevent zero address
+  if (utils.getAddress(address) === "0x0000000000000000000000000000000000000000") {
+    setErrorMessage("Zero address is not allowed.");
+    setIsDisabled(false);
+    return;
+  }
+
+  // Continue to submit
+  const response = await fetch("/api/faucet", {
+    method: "POST",
+    body: JSON.stringify({ address, hcaptchaToken }),
+  });
+
+  const data = await response.json();
+
+  if (response.status !== 200) {
+    setErrorMessage(data.message);
+    return;
+  }
+
+  setSuccessMessage(data.message);
+};
 
   return (
     <>
